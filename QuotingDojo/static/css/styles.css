@@ -1,0 +1,8 @@
+.quote{
+    width: 500px;
+    border-bottom: 1px solid black;
+}
+#wrapper{
+    margin: auto;
+    width: 600px;
+}
