@@ -1,0 +1,156 @@
+> db.students.update({}, {$unset: {'lucky_number': 1}}, {multi:true})
+WriteResult({ "nMatched" : 4, "nUpserted" : 0, "nModified" : 4 })
+> db.students.find().pretty()
+{
+	"_id" : ObjectId("598895ae59b1dda24b6bd78e"),
+	"name" : "Tania",
+	"home_state" : "IL",
+	"birthday" : {
+		"month" : 10,
+		"day" : 9,
+		"year" : 1993
+	},
+	"interest" : [
+		"coding",
+		"brunch",
+		"MongoDB",
+		"Makeup"
+	],
+	"belts_earned" : 0
+}
+{
+	"_id" : ObjectId("598895d659b1dda24b6bd78f"),
+	"name" : "Gasper",
+	"home_state" : "IL",
+	"birthday" : {
+		"month" : 2,
+		"day" : 14,
+		"year" : 2015
+	},
+	"interest" : [
+		"coding",
+		"brunch",
+		"MongoDB",
+		"Chew Toys"
+	],
+	"belts_earned" : 0
+}
+{
+	"_id" : ObjectId("598895fe59b1dda24b6bd790"),
+	"name" : "Picasso",
+	"home_state" : "IL",
+	"birthday" : {
+		"month" : 6,
+		"day" : 4,
+		"year" : 2012
+	},
+	"interest" : [
+		"coding",
+		"brunch",
+		"MongoDB",
+		"Cats"
+	],
+	"belts_earned" : 0
+}
+{
+	"_id" : ObjectId("5988aba359b1dda24b6bd792"),
+	"name" : "Sam",
+	"home_state" : "Washington",
+	"birthday" : {
+		"month" : 8,
+		"day" : 1,
+		"year" : 1996
+	},
+	"belts_earned" : 1
+}
+> db.students.update({}, {$currentDate:{'updated_on': 'date'}})
+WriteResult({
+	"nMatched" : 0,
+	"nUpserted" : 0,
+	"nModified" : 0,
+	"writeError" : {
+		"code" : 2,
+		"errmsg" : "string is not valid type for $currentDate. Please use a boolean ('true') or a $type expression ({$type: 'timestamp/date'})."
+	}
+})
+> db.students.update({}, {$currentDate:{'updated_on': 'date'}}, {multi:true})
+WriteResult({
+	"nMatched" : 0,
+	"nUpserted" : 0,
+	"nModified" : 0,
+	"writeError" : {
+		"code" : 2,
+		"errmsg" : "string is not valid type for $currentDate. Please use a boolean ('true') or a $type expression ({$type: 'timestamp/date'})."
+	}
+})
+> db.students.update({}, {$currentDate:{'updated_on': {$type:'date}}}, {multi:true})
+2017-08-07T13:18:19.391-0500 E QUERY    [thread1] SyntaxError: unterminated string literal @(shell):1:59
+> db.students.update({}, {$currentDate:{'updated_on': {$type:'date'}}}, {multi:true})
+WriteResult({ "nMatched" : 4, "nUpserted" : 0, "nModified" : 4 })
+> db.students.find().pretty()
+{
+	"_id" : ObjectId("598895ae59b1dda24b6bd78e"),
+	"name" : "Tania",
+	"home_state" : "IL",
+	"birthday" : {
+		"month" : 10,
+		"day" : 9,
+		"year" : 1993
+	},
+	"interest" : [
+		"coding",
+		"brunch",
+		"MongoDB",
+		"Makeup"
+	],
+	"belts_earned" : 0,
+	"updated_on" : ISODate("2017-08-07T18:19:19.456Z")
+}
+{
+	"_id" : ObjectId("598895d659b1dda24b6bd78f"),
+	"name" : "Gasper",
+	"home_state" : "IL",
+	"birthday" : {
+		"month" : 2,
+		"day" : 14,
+		"year" : 2015
+	},
+	"interest" : [
+		"coding",
+		"brunch",
+		"MongoDB",
+		"Chew Toys"
+	],
+	"belts_earned" : 0,
+	"updated_on" : ISODate("2017-08-07T18:19:19.456Z")
+}
+{
+	"_id" : ObjectId("598895fe59b1dda24b6bd790"),
+	"name" : "Picasso",
+	"home_state" : "IL",
+	"birthday" : {
+		"month" : 6,
+		"day" : 4,
+		"year" : 2012
+	},
+	"interest" : [
+		"coding",
+		"brunch",
+		"MongoDB",
+		"Cats"
+	],
+	"belts_earned" : 0,
+	"updated_on" : ISODate("2017-08-07T18:19:19.456Z")
+}
+{
+	"_id" : ObjectId("5988aba359b1dda24b6bd792"),
+	"name" : "Sam",
+	"home_state" : "Washington",
+	"birthday" : {
+		"month" : 8,
+		"day" : 1,
+		"year" : 1996
+	},
+	"belts_earned" : 1,
+	"updated_on" : ISODate("2017-08-07T18:19:19.457Z")
+}
