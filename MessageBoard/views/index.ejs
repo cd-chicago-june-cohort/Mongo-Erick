@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+        <link rel="stylesheet" href="/css/styles.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <title>Message Board</title>
+    </head>
+    <body>
+        <div id="wrapper">
+            <div id="header">
+                <h1>The Dojo Message Board</h1>
+            </div>
+            <div id="newMessageContainer">
+                <form action="/addMessage" method="post" class="form">
+                    <h2>Name:</h2>
+                    <input id="name" class="form-control" type="text" name="name">
+                    <h2>Message:</h2>
+                    <textarea name="message" class="form-control" rows="3" cols="137"></textarea>
+                    <input id="floatRight" class="form-control" type="submit" value="Post message">
+                </form>
+            </div>
+            <% for(message in messages) { %>
+                <div id="messages">
+                    <h3>Name: <%= messages[message].name %></h3>
+                    <h3>Message: <%= messages[message].text %></h3>
+                    <div id="comments">
+                        <% if (messages[message].comments.length > 0) { %>
+                            <% for(var j in messages[message].comments) { %>
+                                <% if(messages[message].comments[j].commentText) { %>
+                                    <h4>Name: <%= messages[message].comments[j].commentName %></h4>
+                                    <h4>Comment: <%= messages[message].comments[j].commentText %></h4>
+                                <% } %>
+                            <% } %>
+                        <% } %>
+                    </div>
+                    <div id="postCommentContainer">
+                        <form class="form" action="posts/<%= messages[message].id %>" method="post">
+                            <h4>Name:</h4>
+                            <input id="name" class="form-control" type="text" name="name">
+                            <h4>Comment:</h4>
+                            <textarea name="comment" class="form-control" rows="3" cols="137"></textarea>
+                            <input id="floatRight" class="form-control" type="submit" value="Post comment">
+                        </form>
+                    </div>
+                </div>
+            <% } %>
+        </div>
+    </body>
+</html>
