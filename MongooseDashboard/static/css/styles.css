@@ -1,0 +1,17 @@
+#wrapper{
+    width: 970px;
+    margin: auto;
+}
+#otterContainer{
+    width: 400px;
+    border: 1px solid black;
+    display: inline-block;
+}
+img{
+    height: 300px;
+    width: 400px;
+}
+#addAnimal{
+    width: 300px;
+    border: 1px solid black;
+}
